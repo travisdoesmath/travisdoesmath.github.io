@@ -39,8 +39,16 @@ h1 {
     margin: 10px 10px 0 0;
     float: left;
     overflow: hidden;
+    text-align:center;
 }
 
-.hover-video {
-    align: center;
+.exhibit>img, .exhibit>a>img {
+    margin:0 -100%;
+    height:100%; 
+    width:100%;
+}
+
+.exhibit>video {
+    height:100%
+    margin:0 -100%;
 }
