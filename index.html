@@ -44,6 +44,10 @@
         let hoverVideos = d3.selectAll('.hover-play')
             .on('mouseover', function() { this.play(); })
             .on('mouseout', function() { this.pause(); })
+
+        d3.selectAll('.exhibit>a>img, .exhibit>img')
+            .on('mouseover', function() { d3.select(this).transition().ease(d3.easeCubic).style('transform','scale(1.2)') })
+            .on('mouseout', function() { d3.select(this).transition().ease(d3.easeCubic).style('transform','scale(1)') })
     </script>
 
 </body>
