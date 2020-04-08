@@ -7,6 +7,10 @@ body {
   color: white;
 }
 
+a {
+    color: #D00;
+}
+
 .column {
     max-width: 960px;
     position: relative;
