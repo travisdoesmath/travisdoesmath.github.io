@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta property='og:image' content='preview.jpg'>
+  <meta property='og:image:width' content='1200'>
+  <meta property='og:image:height' content='630'>
+  <meta property='og:type' content='website'>
+  <!-- <meta property='og:url' content=''> -->
+  <meta property='og:title' content='Travis R. Taylor'>
+  <meta property='og:description' content='The official vanity page of Travis R. Taylor'>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Travis R. Taylor</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.2/d3.js"></script>
+</head>
+<body>
+    <div class='column'>
+        <h1>Travis<span class='red'>R</span>Taylor</h1>
+        <p>Hi, I'm Travis. I like doing a lot of things. This is where I keep the ones I like best.</p>
+        <div class="exhibit"><img src="media/double-pendulum.png" style="height:100%; width:100%" alt="Double Pendulum Simulation"></div>
+        <div class="exhibit"><img src="media/covid.png" style="height:100%; width:100%" alt="COVID-19 Deaths"></div>
+        <div class="exhibit"><img src="media/d3snake.png" style="height:100%; width:100%" alt="Snake game in D3"></div>
+
+        <!-- <div class="exhibit"><img src="media/BitterItalianGreyhound.png" style="height:100%; width:100%" alt="Bitter Italian Greyhound"></div> -->
+        <div class="exhibit"><video class="hover-play" muted preload height=100% loop playsinline src="media/woz.webm#t=1.75" type="video/webm" style="margin-left: -100px"></video></div>
+        <div class="exhibit"><img src="media/i-heart-math.png" style="height:100%; width:100%" alt="I Heart Math"></div>
+        <div class="exhibit"><img src="media/travistaylorphoto.png" style="height:100%; width:100" alt="Travis Taylor Photo"></div>        
+
+        <div class="exhibit"><img src="media/comfy-weather.png" style="height:100%; width:100%" alt="Comfy Weather"></div>
+
+        <div class="exhibit"><img src="media/d3life.png" style="height:100%; width:100%" alt="Conway's Game of Life in D3"></div>
+        <div class="exhibit"><img src="media/mudge.jpg" style="height:100%; width:100" alt=Mudge></div>
+        <!-- <div class="exhibit">Standard Deviations</div> -->
+        <!-- <div class="exhibit">Eat at Joe's</div> -->
+        <div class="chart-container" style="max-width: 1000px;"></div>
+    </div>
+    <img src="preview.jpg" style="display:none">
+
+    <script>
+        let hoverVideos = d3.selectAll('.hover-play')
+            .on('mouseover', function() { this.play(); })
+            .on('mouseout', function() { this.pause(); })
+    </script>
+
+</body>
