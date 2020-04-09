@@ -42,7 +42,13 @@ h1 {
     text-align:center;
 }
 
-.exhibit>img, .exhibit>a>img {
+.exhibit>img {
+    margin:0 -100%;
+    height:100%; 
+    width:100%;
+}
+
+.exhibit>a>img {
     margin:0 -100%;
     height:100%; 
     width:100%;
