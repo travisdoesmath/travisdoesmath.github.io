@@ -13,41 +13,125 @@
   <title>Travis R. Taylor</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.2/d3.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
 </head>
 <body>
     <div class='column'>
         <h1>Travis<span class='red'>R</span>Taylor</h1>
         <p>Hi, I'm Travis. I like doing a lot of things. This is where I keep the ones I like best.</p>
         <p>Email me at <a href="mailto:travis@travisrtaylor.com">travis@travisrtaylor.com</a></p>
-        <div class="exhibit"><a href="https://bl.ocks.org/travisdoesmath/c0d08396a0bf8d5de8519ded00bb7866" target="_blank"><img src="media/double-pendulum.png" alt="Double Pendulum Simulation"></a></div>
-        <div class="exhibit"><a href="http://travisdoesmath.github.io/covid-viz/weekly.html" target="_blank"><img src="media/covid.png" alt="COVID-19 Deaths"></a></div>
-        <div class="exhibit"><a href="http://travisdoesmath.github.io/d3-snake/" target="_blank"><img src="media/d3snake.png" alt="Snake game in D3"></a></div>
 
-        <!-- <div class="exhibit"><img src="media/BitterItalianGreyhound.png" style="height:100%; width:100%" alt="Bitter Italian Greyhound"></div> -->
-        <div class="exhibit"><video class="hover-play" muted preload height=100% loop playsinline src="media/woz.webm#t=1.75" type="video/webm"></video></div>
-        <div class="exhibit"><a href="https://shirt.woot.com/offers/i-heart-math" target="_blank"><img src="media/i-heart-math.png" alt="I Heart Math">></a></div>
-        <div class="exhibit"><a href="http://www.travistaylorphotography.com/" target="_blank"><img src="media/travistaylorphoto.png" alt="Travis Taylor Photo"></a></div>
-
-        <div class="exhibit"><a href="http://travisdoesmath.github.io/comfy-weather" target="_blank"><img src="media/comfy-weather.png" alt="Comfy Weather"></a></div>
-        <div class="exhibit"><a href="http://travisdoesmath.github.io/d3-life/" target="_blank"><img src="media/d3life.png" alt="Conway's Game of Life in D3"></a></div>
-        <div class="exhibit"><a href="https://open.spotify.com/artist/2gr6qq2679SIflhvIq9JHw" target="_blank"><img src="media/mudge.jpg" alt=Mudge></a></div>
-        <div class="exhibit"><img src="media/stddev.jpg" height=100%></div>
-        <div class="exhibit"><a href="https://bl.ocks.org/travisdoesmath/f7dc3cc59316d3fad39b347b805b2730" target="_blank"><img src="media/golden-curl.png" alt="Golden Curl"></a></div>
-        <!-- <div class="exhibit">Eat at Joe's</div> -->
-        <!-- <div class="exhibit">Movies to Watch</div> -->
+        <div id="app">
+            <template v-for="exhibit in exhibits">
+                <div class="exhibit">
+                    <a :href="exhibit.link" target="_blank">
+                        <div class="exhibit-media-container">
+                            <img @mouseenter="grow" @mouseout="shrink" v-if="exhibit.type === 'img'" :src="exhibit.src" :alt="exhibit.alt" class="exhibit-media">
+                            <video @mouseenter="play" @mouseout="pause" v-if="exhibit.type === 'video/webm'" :src="exhibit.src" :alt="exhibit.alt" class="hover-play exhibit-media" muted preload height=100% loop playsinline :type="exhibit.type">
+                        </div>
+                    </a>
+                </div>
+            </template>
+        </div>
         
         <div class="chart-container" style="max-width: 1000px;"></div>
     </div>
     <img src="preview.jpg" style="display:none">
 
     <script>
-        let hoverVideos = d3.selectAll('.hover-play')
-            .on('mouseover', function() { this.play(); })
-            .on('mouseout', function() { this.pause(); })
+        Vue.component('exhibit', {
+            template: '<div>'
+        })
+        var app = new Vue({
+            el: '#app',
+            data: {
+                exhibits: [
+                    { 
+                        link: "https://bl.ocks.org/travisdoesmath/c0d08396a0bf8d5de8519ded00bb7866",
+                        src: "media/double-pendulum.png",
+                        alt: "Double Pendulum Simulation",
+                        type: "img"
+                    },
+                    {
+                        link: "http://travisdoesmath.github.io/covid-viz/weekly.html",
+                        src: "media/covid.png",
+                        alt: "COVID-19 Deaths",
+                        type: "img"
+                    },
+                    {
+                        link: "http://travisdoesmath.github.io/d3-snake/",
+                        src: "media/d3snake.png",
+                        alt: "Snake game in D3",
+                        type: "img"
+                    },
+                    {
+                        link: "#",
+                        src: "media/woz.webm#t=1.75",
+                        alt: "Time-rotated Wizard of Oz",
+                        type: "video/webm"
+                    },
+                    {
+                        link: "https://shirt.woot.com/offers/i-heart-math",
+                        src: "media/i-heart-math.png",
+                        alt: "I Heart Math",
+                        type: "img"
+                    },
+                    {
+                        link: "http://www.travistaylorphotography.com/",
+                        src: "media/travistaylorphoto.png",
+                        alt: "Travis Taylor Photo",
+                        type: "img"
+                    },
+                    {
+                        link: "http://travisdoesmath.github.io/comfy-weather",
+                        src: "media/comfy-weather.png",
+                        alt: "Comfy Weather",
+                        type: "img"
+                    },
+                    {
+                        link: "http://travisdoesmath.github.io/d3-life/",
+                        src: "media/d3life.png",
+                        alt: "Conway's Game of Life in D3",
+                        type: "img"
+                    },
+                    {
+                        link: "https://open.spotify.com/artist/2gr6qq2679SIflhvIq9JHw",
+                        src: "media/mudge.jpg",
+                        alt: "Mudge",
+                        type: "img"
+                    },
+                    {
+                        link: "#",
+                        src: "media/stddev.jpg",
+                        alt: "Standard Deviations",
+                        type: "img"
+                    },
+                    {
+                        link: "https://bl.ocks.org/travisdoesmath/f7dc3cc59316d3fad39b347b805b2730",
+                        src: "media/golden-curl.png",
+                        alt: "Golden Curl",
+                        type: "img"
+                    },
 
-        d3.selectAll('.exhibit>a>img, .exhibit>img')
-            .on('mouseover', function() { d3.select(this).transition().ease(d3.easeCubic).style('transform','scale(1.2)') })
-            .on('mouseout', function() { d3.select(this).transition().ease(d3.easeCubic).style('transform','scale(1)') })
+                ]
+            },
+            methods: {
+                grow: function(e) {
+                    d3.select(e.target).transition().ease(d3.easeCubic).style('transform','scale(1.2)')
+                },
+                shrink: function(e) {
+                    d3.select(e.target).transition().ease(d3.easeCubic).style('transform','scale(1)')
+                },
+                play: function(e) {
+                    console.log("!")
+                    e.target.play();
+                },
+                pause: function(e) {
+                    e.target.pause();
+                }
+            }
+        })
+
     </script>
 
 </body>
