@@ -1,15 +1,28 @@
-var svg = d3.select('#pendulum').select('svg')
-    //width = +svg.style("width"),
-    //height = +svg.style("height"),
     width = 300;
     height = 300;
+
+var canvas = d3.select('#pendulum').select(".d3-target").append("canvas")
+    .attr('width', width)
+    .attr('height', height)
+    .style('position', 'absolute')
+    .style('top', 0)
+    .style('left', 0)
+var context = canvas.node().getContext('2d');
+context.rect(0, 0, width, width)
+context.fillStyle = 'white';
+context.fill();
+
+var svg = d3.select('#pendulum').select(".d3-target").append('svg')
+    .attr('width', width)
+    .attr('height', height)
+    .style('position', 'absolute')
+    .style('top', 0)
+    .style('left', 0)
+    //width = +svg.style("width"),
+    //height = +svg.style("height"),
     g = svg.append("g")
     // .attr("transform", "translate(" + width*.5 + "," + height*.5 + ")");
     color = d3.scaleSequential(d3.interpolateRainbow).domain([0, nPendula]);
-
-
-var canvas = d3.select("canvas");
-var context = canvas.node().getContext('2d');
 
 var xScale = d3.scaleLinear().domain([-1.5,1.5]).range([0, width])
 var yScale = d3.scaleLinear().domain([-1.5,1.5]).range([-width* 1/10, width * 9/10])
