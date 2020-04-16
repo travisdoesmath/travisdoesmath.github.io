@@ -9,16 +9,12 @@ exhibits = [
     {
         id: 'pendulum',
         link: "https://bl.ocks.org/travisdoesmath/c0d08396a0bf8d5de8519ded00bb7866",
-        src: "",
-        alt: "",
         type: "d3"
     },
     {
         id: 'snake',
         link: "http://travisdoesmath.github.io/d3-snake/",
-        src: "media/d3snake.png",
-        alt: "Snake game in D3",
-        type: "img"
+        type: "d3"
     },
     {
         id: 'woz',

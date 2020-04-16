@@ -82,3 +82,15 @@ h1 {
     stroke: #000;
     stroke-width: 2px;
 }
+
+.pixel {
+    fill: #DDD;
+}
+
+.snake {
+    fill: black;
+}
+
+.food {
+    fill: #800;
+}
