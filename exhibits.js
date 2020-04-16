@@ -1,17 +1,17 @@
 exhibits = [
     {
-        id: 'pendulum',
-        link: "https://bl.ocks.org/travisdoesmath/c0d08396a0bf8d5de8519ded00bb7866",
-        src: "",
-        alt: "",
-        type: "d3"
-    },
-    {
         id: 'covid',
         link: "http://travisdoesmath.github.io/covid-viz/",
         src: "media/covid.png",
         alt: "COVID-19 Deaths",
         type: "img"
+    },
+    {
+        id: 'pendulum',
+        link: "https://bl.ocks.org/travisdoesmath/c0d08396a0bf8d5de8519ded00bb7866",
+        src: "",
+        alt: "",
+        type: "d3"
     },
     {
         id: 'snake',
