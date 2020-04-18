@@ -47,10 +47,15 @@ exhibits = [
     {
         id: 'life',
         link: "http://travisdoesmath.github.io/d3-life/",
-        src: "media/d3life.png",
-        alt: "Conway's Game of Life in D3",
-        type: "img"
+        type: 'd3'
     },
+    // {
+    //     id: 'life-old',
+    //     link: "http://travisdoesmath.github.io/d3-life/",
+    //     src: "media/d3life.png",
+    //     alt: "Conway's Game of Life in D3",
+    //     type: "img"
+    // },
     {
         id: 'mudge',
         link: "https://open.spotify.com/artist/2gr6qq2679SIflhvIq9JHw",
