@@ -8,7 +8,7 @@ exhibits = [
     },
     {
         id: 'pendulum',
-        link: "https://bl.ocks.org/travisdoesmath/c0d08396a0bf8d5de8519ded00bb7866",
+        link: "https://bl.ocks.org/travisdoesmath/32eea7d1cb47c18bfabcab65abc9b36c",
         type: "d3"
     },
     {

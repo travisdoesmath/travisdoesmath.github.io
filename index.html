@@ -84,15 +84,17 @@
             })
 
         </script>
-        <script src="js/double_pendulum.js"></script>
-        <script src="js/pendulum-exhibit.js"></script>
+        <!-- <script src="js/double_pendulum.js"></script> -->
+        <!-- <script src="js/pendulum-exhibit.js"></script> -->
         <!-- <script src="modules/life.js"></script> -->
         <!-- <script src="js/snake.js"></script> -->
         <script type="module">
             import { SnakeGame } from './modules/snake.js';
             import { LifeGame } from './modules/life.js';
+            import { PendulumPlayer } from './modules/pendulum.js';
             let snakeGame = new SnakeGame(document.getElementById('snake'));
             let lifeGame = new LifeGame(document.getElementById('life'));
+            let pendulumPlayer = new PendulumPlayer(document.getElementById('pendulum'))
         </script>
         <script>
 

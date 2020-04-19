@@ -50,9 +50,7 @@ h1 {
 }
 
 .exhibit {
-    border: 1px solid white;
     width: 300px;
-    height: 300px;
     margin: 10px 10px 0 0;
     float: left;
     overflow: hidden;
@@ -63,23 +61,22 @@ h1 {
 .exhibit-media-container {
     margin-left: 50%;
     transform: translateX(-50%);
-    height: 100%;
+    /* height: 100%; */
+    height: 300px;
     width: 100%;
     pointer-events: none;
+    border-radius: 15px;
+    overflow: hidden;
 }
 
 .exhibit-media {
     height:100%; 
     transform: scale(1);
     pointer-events:all;
-}
 
-.bob {
-    fill: #000;
 }
 
 .shaft {
-    stroke: #000;
     stroke-width: 2px;
 }
 
