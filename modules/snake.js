@@ -63,7 +63,6 @@ class GameState {
 
     setFood() {
         let emptyPixelIndices = d3.range(this.board.pixelsX*this.board.pixelsY).filter(d => !this.snake.coords.map(x => this.board.coordToIndex(x)).includes(d));
-        console.log(emptyPixelIndices)
         let foodLocationIndex = emptyPixelIndices[Math.floor(Math.random()*emptyPixelIndices.length)];
         return this.board.indexToCoord(foodLocationIndex)
     }

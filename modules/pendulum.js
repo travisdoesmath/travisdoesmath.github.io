@@ -75,7 +75,7 @@ class Pendulum {
 export class PendulumPlayer {
     constructor(el) {
         this._pause = false;
-        this.nPendulums = 60;
+        this.nPendulums = 30;
         this.pendulums = d3.range(this.nPendulums).map(x => new Pendulum({m2: 1 + 0.01*x/this.nPendulums, theta1:0.75*Math.PI}))
 
         this.width = 300;
