@@ -6,8 +6,8 @@ class Board {
         this.pixelWidth = width;
     }
 
-    coordToIndex = ([x, y]) => this.pixelsX * y + x;
-    indexToCoord = i => [i % this.pixelsX, Math.floor(i/this.pixelsX)];
+    coordToIndex([x, y]) { return this.pixelsX * y + x; }
+    indexToCoord(i) { return [i % this.pixelsX, Math.floor(i/this.pixelsX)]; }
 }
 
 class Cells {

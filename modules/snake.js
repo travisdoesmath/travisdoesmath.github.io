@@ -7,8 +7,8 @@ class Board {
 
     }
 
-    coordToIndex = ([x, y]) => this.pixelsX * y + x;
-    indexToCoord = i => [i % this.pixelsX, Math.floor(i/this.pixelsX)];
+    coordToIndex(x, y) { console.log(this); return this.pixelsX * y + x; }
+    indexToCoord(i) { return [i % this.pixelsX, Math.floor(i/this.pixelsX)]; }
 }
 
 class Snake {
@@ -62,7 +62,7 @@ class GameState {
     }
 
     setFood() {
-        let emptyPixelIndices = d3.range(this.board.pixelsX*this.board.pixelsY).filter(d => !this.snake.coords.map(this.board.coordToIndex).includes(d));
+        let emptyPixelIndices = d3.range(this.board.pixelsX*this.board.pixelsY).filter(d => !this.snake.coords.map(x => this.board.coordToIndex(x)).includes(d));
         let foodLocationIndex = emptyPixelIndices[Math.floor(Math.random()*emptyPixelIndices.length)];
         return this.board.indexToCoord(foodLocationIndex)
     }
@@ -134,7 +134,7 @@ export class SnakeGame {
                 nextPos[0] > this.board.pixelsX - 1 || 
                 nextPos[1] < 0 || 
                 nextPos[1] > this.board.pixelsY - 1 || 
-                snake.coords.map(this.board.coordToIndex).includes(this.board.coordToIndex(nextPos))) { 
+                snake.coords.map(x => this.board.coordToIndex(x)).includes(this.board.coordToIndex(nextPos))) { 
                 this.alive = false; 
                 this.endGame();
             } else {

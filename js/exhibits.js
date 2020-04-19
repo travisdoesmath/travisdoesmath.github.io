@@ -19,7 +19,7 @@ exhibits = [
     {
         id: 'woz',
         link: "#",
-        src: "media/woz.webm#t=1.75",
+        src: "http://travisrtaylor.com/media/woz.webm#t=1.75",
         alt: "Time-rotated Wizard of Oz",
         type: "video/webm"
     },
