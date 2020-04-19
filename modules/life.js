@@ -60,7 +60,7 @@ export class LifeGame {
         d3.select(el).select('.exhibit-media-container')
             .style('background-color', 'white')
 
-        d3.select(el) 
+        d3.select(el).select('a') 
             .on('mouseenter', () => { this._pause = false; this.play(); })
             .on('mouseout', () => { this.pause() });
 

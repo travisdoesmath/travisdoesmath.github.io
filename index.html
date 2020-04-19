@@ -40,7 +40,7 @@
                     <div class="exhibit-media-container">
                         <img v-if="type === 'img'" @mouseenter="grow" @mouseout="shrink" :src="src" class="exhibit-media">
                         <video v-else-if="type === 'video/webm'" @mouseenter="play" @mouseout="pause" :src="src" class="hover-play exhibit-media" muted preload height=100% loop playsinline :type="type"></video>
-                        <div v-else-if="type === 'd3'" class="d3-target"></div>
+                        <div v-else-if="type === 'd3'" class="d3-target exhibit-media"></div>
                     </div>
                 </a>
                 <section class='exhibit-description'>
