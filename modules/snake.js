@@ -7,7 +7,7 @@ class Board {
 
     }
 
-    coordToIndex(x, y) { console.log(this); return this.pixelsX * y + x; }
+    coordToIndex([x, y]) { return this.pixelsX * y + x; }
     indexToCoord(i) { return [i % this.pixelsX, Math.floor(i/this.pixelsX)]; }
 }
 
@@ -63,6 +63,7 @@ class GameState {
 
     setFood() {
         let emptyPixelIndices = d3.range(this.board.pixelsX*this.board.pixelsY).filter(d => !this.snake.coords.map(x => this.board.coordToIndex(x)).includes(d));
+        console.log(emptyPixelIndices)
         let foodLocationIndex = emptyPixelIndices[Math.floor(Math.random()*emptyPixelIndices.length)];
         return this.board.indexToCoord(foodLocationIndex)
     }
@@ -75,10 +76,12 @@ export class SnakeGame {
         this.board = board;
         this.state = new GameState(board, snake);
 
-        d3.select(el)
-            .style('background-color', 'white')
+        d3.select(el) 
             .on('mouseenter', () => { this.state.pause = false; this.play(); })
             .on('mouseout', () => { this.pause(); })
+
+        d3.select(el).select('.exhibit-media-container')
+            .style('background-color', 'white')
 
          this.svg = d3.select(el).select(".d3-target").append('svg')
             .attr("width", board.pixelWidth * board.pixelsX)
