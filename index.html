@@ -30,19 +30,23 @@
         <!-- Templates -->
         <script type="text/x-template" id="exhibit-grid-template">
             <div>
-                <exhibit v-for="exhibit in exhibits" :id="exhibit.id" :link="exhibit.link" :type="exhibit.type" :src="exhibit.src">
+                <exhibit v-for="exhibit in exhibits" :id="exhibit.id" :link="exhibit.link" :type="exhibit.type" :src="exhibit.src" :title="exhibit.title" :description="exhibit.description">
             </div>
         </script>
         <script type="text/x-template" id="exhibit-template">
-            <div class="exhibit" :id="id">
+            <article class="exhibit" :id="id">
+                <h2>{{ title }}</h2>
                 <a :href="link" target="_blank">
                     <div class="exhibit-media-container">
-                        <img v-if="type === 'img'" @mouseenter="grow" @mouseout="shrink" :src="src" :alt="alt" class="exhibit-media">
-                        <video v-else-if="type === 'video/webm'" @mouseenter="play" @mouseout="pause" :src="src" :alt="alt" class="hover-play exhibit-media" muted preload height=100% loop playsinline :type="type"></video>
+                        <img v-if="type === 'img'" @mouseenter="grow" @mouseout="shrink" :src="src" class="exhibit-media">
+                        <video v-else-if="type === 'video/webm'" @mouseenter="play" @mouseout="pause" :src="src" class="hover-play exhibit-media" muted preload height=100% loop playsinline :type="type"></video>
                         <div v-else-if="type === 'd3'" class="d3-target"></div>
                     </div>
                 </a>
-            </div>
+                <section class='exhibit-description'>
+                    <p v-html='description'></p>
+                </section>
+            <article>
         </script>
 
         <!-- Vue components and app -->
@@ -54,13 +58,12 @@
                         exhibits: exhibits
                     }
                 }
-
             })
 
 
             Vue.component('exhibit', {
                 template: '#exhibit-template',
-                props: ['id','link','src','alt','type'],
+                props: ['id','link','src','alt','type','title','description'],
                 methods: {
                     grow: function(e) {
                         d3.select(e.target).transition().ease(d3.easeCubic).style('transform','scale(1.2)')

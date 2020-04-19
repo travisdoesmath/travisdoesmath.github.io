@@ -54,8 +54,11 @@ h1 {
     margin: 10px 10px 0 0;
     float: left;
     overflow: hidden;
-    text-align:center;
+    /* text-align:center; */
+}
 
+.exhibit>h2 {
+    margin-bottom:5px;
 }
 
 .exhibit-media-container {
@@ -74,6 +77,10 @@ h1 {
     transform: scale(1);
     pointer-events:all;
 
+}
+
+.exhibit-description {
+    height:60px;
 }
 
 .shaft {
