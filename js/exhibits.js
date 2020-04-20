@@ -24,7 +24,7 @@ exhibits = [
     {
         id: 'woz',
         link: "#",
-        src: "http://travisrtaylor.com/media/woz.webm#t=1.75",
+        src: "http://travisdoesmath.github.io/media/woz.webm#t=1.75",
         title: "Time-rotated Wizard of Oz",
         description: "A small slice of the Wizard of Oz from a different perspective. We were never in Kansas. We were always in Kansas.",
         type: "video/webm"
