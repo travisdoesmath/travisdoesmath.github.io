@@ -12,7 +12,7 @@ class Board {
 
 class Cells {
 
-    constructor(board = new Board(), p = 0.4    ) {
+    constructor(board = new Board(), p = 0.4) {
         this.board = board;
         this.live = []
         d3.range(board.pixelsX).forEach(x => d3.range(board.pixelsY).forEach(y => Math.random() < p ? this.live.push([x,y]): null))

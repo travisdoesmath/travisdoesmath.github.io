@@ -36,17 +36,37 @@
         <script type="text/x-template" id="exhibit-template">
             <article class="exhibit" :id="id">
                 <h2>{{ title }}</h2>
-                <a :href="link" target="_blank">
-                    <div class="exhibit-media-container">
-                        <img v-if="type === 'img'" @mouseenter="grow" @mouseout="shrink" :src="src" class="exhibit-media">
-                        <video v-else-if="type === 'video/webm'" @mouseenter="play" @mouseout="pause" :src="src" class="hover-play exhibit-media" muted preload height=100% loop playsinline :type="type"></video>
-                        <div v-else-if="type === 'd3'" class="d3-target exhibit-media"></div>
-                    </div>
-                </a>
+                <img-exhibit v-if="type === 'img'" :src="src" :link="link"></img-exhibit>
+                <video-exhibit v-else-if="type === 'video/webm'" :src="src" :link="link"></video-exhibit>
+                <d3-exhibit v-else-if="type === 'd3'" :link="link"></d3-exhibit>
                 <section class='exhibit-description'>
                     <p v-html='description'></p>
                 </section>
             <article>
+        </script>
+
+        <script type="text/x-template" id="img-exhibit-template">
+            <a :href="link" target="_blank" @mouseenter="grow" @mouseout="shrink">
+                <div class="exhibit-media-container">
+                    <img :src="src" class="exhibit-media">
+                </div>
+            </a>
+        </script>
+
+        <script type="text/x-template" id="video-exhibit-template">
+            <a :href="link" target="_blank" @mouseenter="play" @mouseout="pause">
+                <div class="exhibit-media-container">
+                    <video :src="src" class="hover-play exhibit-media" muted preload height=100% loop playsinline type="video/webm"></video>
+                </div>
+            </a>
+        </script>
+
+        <script type="text/x-template" id="d3-exhibit-template">
+            <a :href="link" target="_blank">
+                <div class="exhibit-media-container">
+                    <div class="d3-target exhibit-media"></div>
+                </div>
+            </a>
         </script>
 
         <!-- Vue components and app -->
@@ -60,37 +80,47 @@
                 }
             })
 
+            Vue.component('img-exhibit', {
+                template: "#img-exhibit-template",
+                props: ['link', 'src'],
+                methods: {
+                    grow: function(e) {
+                        d3.select(e.target).select('.exhibit-media').transition().ease(d3.easeCubic).style('transform','scale(1.2)')
+                    },
+                    shrink: function(e) {
+                        d3.select(e.target).select('.exhibit-media').transition().ease(d3.easeCubic).style('transform','scale(1)')
+                    },                    
+                }
+            })
+
+            Vue.component('video-exhibit', {
+                template: "#video-exhibit-template",
+                props: ['link', 'src'],
+                methods: {
+                    play: function(e) {
+                        d3.select(e.target).select('.exhibit-media').node().play();
+                    },
+                    pause: function(e) {
+                        d3.select(e.target).select('.exhibit-media').node().play();
+                    }                    
+                }
+            })
+
+            Vue.component('d3-exhibit', {
+                template: "#d3-exhibit-template",
+                props: ['link']
+            })
 
             Vue.component('exhibit', {
                 template: '#exhibit-template',
                 props: ['id','link','src','alt','type','title','description'],
-                methods: {
-                    grow: function(e) {
-                        d3.select(e.target).transition().ease(d3.easeCubic).style('transform','scale(1.2)')
-                    },
-                    shrink: function(e) {
-                        d3.select(e.target).transition().ease(d3.easeCubic).style('transform','scale(1)')
-                    },
-                    play: function(e) {
-                        e.target.play();
-                    },
-                    pause: function(e) {
-                        e.target.pause();
-                    }
-                }
-
             })
-
 
             var app = new Vue({
                 el: '#app'
             })
 
         </script>
-        <!-- <script src="js/double_pendulum.js"></script> -->
-        <!-- <script src="js/pendulum-exhibit.js"></script> -->
-        <!-- <script src="modules/life.js"></script> -->
-        <!-- <script src="js/snake.js"></script> -->
         <script type="module">
             import { SnakeGame } from './modules/snake.js';
             import { LifeGame } from './modules/life.js';
