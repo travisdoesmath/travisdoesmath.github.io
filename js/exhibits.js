@@ -79,10 +79,8 @@ exhibits = [
     {
         id: 'golden',
         link: "https://bl.ocks.org/travisdoesmath/f7dc3cc59316d3fad39b347b805b2730",
-        src: "media/golden-curl.png",
         title: "Golden Curl",
         description: "Playing with golden spirals as limits of matrix interpolations, and then making it curl and uncurl",
-        type: "img"
+        type: "d3"
     },
-
 ]

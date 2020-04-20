@@ -209,17 +209,3 @@ export class PendulumPlayer {
         this._pause = true;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-// var run = setInterval(() => { update() }, 2);
-
-

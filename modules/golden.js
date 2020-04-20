@@ -1,149 +1,123 @@
+import { Exhibit } from '../modules/d3exhibit.js'
+
+function generateTransformations(T, n) {
+    let T_n = {scale:1, angle:0, t_x:0, t_y:0};
+    let matrices = [T_n];
+    for (let i = 0; i < n; i++) {
+        T_n = composeTransformations(T_n, T)
+        matrices.push(T_n);
+    }
+    return matrices
+}
+
+function composeTransformations(T_1, T_2) {
+    return {
+        'scale': T_1.scale * T_2.scale,
+        'angle': T_1.angle + T_2.angle,
+        't_x': T_2.scale * T_1.t_x * Math.cos(T_2.angle) - T_2.scale * T_1.t_y * Math.sin(T_2.angle) + T_2.t_x,
+		't_y': T_2.scale * T_1.t_x * Math.sin(T_2.angle) + T_2.scale * T_1.t_y * Math.cos(T_2.angle) + T_2.t_y
+    }
+}
+
+function nthRoot(T, n) {
+    let C = function(n, theta, r) {
+        return (1-r*Math.cos(theta)-r**(n+1)*Math.cos((n+1)*theta)+r**(n+2)*Math.cos(n*theta))/(1-2*r*Math.cos(theta)+r**2)
+    }
+    let S = function(n, theta, r) {
+        return (r*Math.sin(theta)-r**(n+1)*Math.sin((n+1)*theta)+r**(n+2)*Math.sin((n)*theta))/(1-2*r*Math.cos(theta)+r**2)
+    }
+    let detM = C(n-1, T.angle/n, T.scale**(1/n))**2 + S(n-1, T.angle/n, T.scale**(1/n))**2;
+    let new_t_x = (T.t_x *  C(n-1, T.angle/n, T.scale**(1/n)) + T.t_y * S(n-1, T.angle/n, T.scale**(1/n)))/detM;
+	let new_t_y = (T.t_x * -S(n-1, T.angle/n, T.scale**(1/n)) + T.t_y * C(n-1, T.angle/n, T.scale**(1/n)))/detM;
+
+    return {
+        'scale':(T.scale)**(1/n),
+        'angle':T.angle/n,
+        't_x':new_t_x,
+        't_y':new_t_y
+    };
+}
+
+function getMatrixTransformation(T) {
+    let a = T.scale * Math.cos(T.angle),
+        b = T.scale * Math.sin(T.angle),
+        c = -T.scale * Math.sin(T.angle),
+        d = T.scale * Math.cos(T.angle),
+        e = T.t_x,
+        f = T.t_y;
+
+    return `matrix(${a},${b},${c},${d},${e},${f})`;
+}
+
+export class GoldenCurl extends Exhibit {
+
+    constructor(el) {
+        super(el, {bgcolor:'black', width:300, height:300, frameTime: 15});
+
+        this.depth = 7;
+        this.step = 130;
+
+        this.width = 300;
+        this.height = 300;
+
+        this.scale = d3.scaleLinear().domain([0,1]).range([0,100])
+
+        this.lowerLayer = this.svg.append("g").attr('transform', 'translate(30,30)')
+	    this.upperLayer = this.svg.append("g").attr('transform', 'translate(30,30)')
+
+        this.update().then(this.draw());
+
+    }
+
+    async update() {
+        this.step += 1;
+        this.step %= 200;
+        return this.step;
+    }
+
+    draw() {
+        let n = d3.easeQuadIn(d3.easeQuadInOut(Math.min(this.step/100, 2 - this.step/100))) * 8 + 1; // number of interpolated squares
+        let angle = -Math.PI / 2 + d3.easeQuadInOut(Math.min(this.step/100, 2 - this.step/100)) * Math.PI;
+        let T = {scale:Math.sqrt(5)*0.5-0.5, angle:angle, t_x: this.scale(1), t_y: this.scale(1)}
+        let mainSquareTransformations = generateTransformations(T, this.depth);
+        let interpolatedSquareTransformations = generateTransformations(nthRoot(T, n), this.depth * n);
+
+        let color = d3.scaleSequential(d3.interpolateRainbow).domain([0, 5*n]);
+
+        let mainSquares = this.upperLayer.selectAll(".mainSquare").data(mainSquareTransformations);
+
+        mainSquares
+        	.enter()
+		 	.append("rect")
+			.attr("class", "mainSquare")
+			.attr("width", this.scale(1))
+			.attr("height", this.scale(1))
+			.attr("stroke", "white")
+			.attr("stroke-width", d => `${2/d.scale}px`)
+			.attr("transform", getMatrixTransformation)
+			.attr("fill", "none")
+            .merge(mainSquares)
+            .attr("transform", getMatrixTransformation)
 
 
+        let interpolatedSquares = this.lowerLayer.selectAll(".square").data(interpolatedSquareTransformations);
 
-
-
-	var depth = 7;
-
-	var width = 960,
-		height = 500;
-
-	var splitTransformation = function(T, n) {
-		var C = function(n, theta, r) {
-			return (1-r*Math.cos(theta)-r**(n+1)*Math.cos((n+1)*theta)+r**(n+2)*Math.cos(n*theta))/(1-2*r*Math.cos(theta)+r**2)
-		}
-		var S = function(n, theta, r) {
-			return (r*Math.sin(theta)-r**(n+1)*Math.sin((n+1)*theta)+r**(n+2)*Math.sin((n)*theta))/(1-2*r*Math.cos(theta)+r**2)
-		}
-		var detM = C(n-1, T.theta/n, T.A**(1/n))**2 + S(n-1, T.theta/n, T.A**(1/n))**2;
-		var new_t_x = (T.t_x *  C(n-1, T.theta/n, T.A**(1/n)) + T.t_y * S(n-1, T.theta/n, T.A**(1/n)))/detM;
-		var new_t_y = (T.t_x * -S(n-1, T.theta/n, T.A**(1/n)) + T.t_y * C(n-1, T.theta/n, T.A**(1/n)))/detM;
-		var T_split = {
-			'A':(T.A)**(1/n),
-			'theta':T.theta/n,
-			't_x':new_t_x,
-			't_y':new_t_y
-		};
-		return T_split;
-	}
-
-	var composeTransformations = function(T_1, T_2) {
-		return {
-			'A': T_1.A * T_2.A,
-			'theta': T_1.theta + T_2.theta,
-			't_x': T_2.A * T_1.t_x * Math.cos(T_2.theta) - T_2.A * T_1.t_y * Math.sin(T_2.theta) + T_2.t_x,
-			't_y': T_2.A * T_1.t_x * Math.sin(T_2.theta) + T_2.A * T_1.t_y * Math.cos(T_2.theta) + T_2.t_y
-		}
-	}
-
-
-	var scale = d3.scaleLinear().domain([0,1]).range([0,130])
-
-	var svg = d3.select("svg")
-		.attr("width", width)
-		.attr("height", height)
-		.append("g")
-		.attr("transform", "translate(50,50)");
-
-	var lowerLayer = svg.append("g")
-	var upperLayer = svg.append("g")
-
-	var draw = function(angle, n) {
-
-		color = d3.scaleSequential(d3.interpolateRainbow).domain([0, 5*n]);
-
-		T = {
-			'A':Math.sqrt(5)/2 - 0.5,
-			'theta': angle,
-			't_x':1,
-			't_y':1
-		}
-
-		var T_split = splitTransformation(T, n);
-
-		transformations = [{'A':1, 'theta':0, 't_x': 0, 't_y': 0}];
-		for (var i = 0; i < depth*n; i++) {
-			var T_next = composeTransformations(transformations[transformations.length - 1], T_split);
-			transformations.push(T_next);
-		}
-
-		var squares = lowerLayer.selectAll(".square").data(transformations)
-
-		squares
+		interpolatedSquares
 			.enter()
 		 	.append("rect")
 			.attr("class", "square")
-			.attr("width", scale(1))
-			.attr("height", scale(1))
-			.attr("transform", function(t) { 
-				var a = t.A * Math.cos(t.theta),
-					b = t.A * Math.sin(t.theta),
-					c = - t.A * Math.sin(t.theta),
-					d = t.A * Math.cos(t.theta),
-					e = scale(t.t_x),
-					f = scale(t.t_y);
-				return "matrix(" + a + "," + b + "," + c + "," + d + "," + e + "," + f + ")"; })
-
-		squares
-			.attr("transform", function(t) { 
-				var a = t.A * Math.cos(t.theta),
-					b = t.A * Math.sin(t.theta),
-					c = - t.A * Math.sin(t.theta),
-					d = t.A * Math.cos(t.theta),
-					e = scale(t.t_x),
-					f = scale(t.t_y);
-				return "matrix(" + a + "," + b + "," + c + "," + d + "," + e + "," + f + ")"; })
+			.attr("width", this.scale(1))
+			.attr("height", this.scale(1))
+            .merge(interpolatedSquares)
+			.attr("transform", getMatrixTransformation)
+			.attr("fill", function(d, i) { return color(i); })
+            .attr('fill-opacity', 0.25)
 			.attr("stroke", function(d, i) { return color(i); })
-			.attr("stroke-width", function(d, i) { return 2/d.A + "px"; })
-			//.attr("fill", function(d, i) { return color(i); })
-			.attr("fill", "none")
+			.attr("stroke-width", d => `${2/d.scale}px`)
 
-		squares.exit()
-			.remove();
 
-		var goldenTransformations = [{'A':1, 'theta':0, 't_x': 0, 't_y': 0}];
-		for (var i = 0; i < depth; i++) {
-			var T_next = composeTransformations(goldenTransformations[goldenTransformations.length - 1], T);
-			goldenTransformations.push(T_next);
-		}
+        interpolatedSquares.exit()
+            .remove();
 
-		var goldenSquares = upperLayer.selectAll(".mainSquare").data(goldenTransformations, function(d) { return d.A; });
-
-		goldenSquares
-			.enter()
-		 	.append("rect")
-			.attr("class", "mainSquare")
-			.attr("width", scale(1))
-			.attr("height", scale(1))
-			.attr("stroke", "white")
-			.attr("stroke-width", function(d, i) { return 2/d.A + "px"; })
-			.attr("transform", function(t) { 
-				var a = t.A * Math.cos(t.theta),
-					b = t.A * Math.sin(t.theta),
-					c = - t.A * Math.sin(t.theta),
-					d = t.A * Math.cos(t.theta),
-					e = scale(t.t_x),
-					f = scale(t.t_y);
-				return "matrix(" + a + "," + b + "," + c + "," + d + "," + e + "," + f + ")"; })
-
-		goldenSquares
-			.attr("transform", function(t) { 
-				var a = t.A * Math.cos(t.theta),
-					b = t.A * Math.sin(t.theta),
-					c = - t.A * Math.sin(t.theta),
-					d = t.A * Math.cos(t.theta),
-					e = scale(t.t_x),
-					f = scale(t.t_y);
-				return "matrix(" + a + "," + b + "," + c + "," + d + "," + e + "," + f + ")"; })
-
-	}
-
-	step = 0;
-	n = 1;
-	var animate = function() {
-		step = (step + 1/100) % 2;
-		n = d3.easeQuadIn(d3.easeQuadInOut(Math.min(step, 2 - step))) * 8 + 1;
-		draw(-Math.PI / 2 + d3.easeQuadInOut(Math.min(step, 2 - step)) * Math.PI, n);
-	}
-
-	anim = d3.timer(animate);
+    }
+}
