@@ -32,7 +32,7 @@
         <!-- Templates -->
         <script type="text/x-template" id="exhibit-grid-template">
             <div>
-                <exhibit v-for="exhibit in exhibits" :id="exhibit.id" :link="exhibit.link" :type="exhibit.type" :src="exhibit.src" :title="exhibit.title" :description="exhibit.description">
+                <exhibit v-for="exhibit in exhibits" :id="exhibit.id" :link="exhibit.link" :type="exhibit.type" :src="exhibit.src" :altsrc="exhibit.altsrc" :title="exhibit.title" :description="exhibit.description">
             </div>
         </script>
         <script type="text/x-template" id="exhibit-template">
@@ -100,7 +100,7 @@
 
             Vue.component('video-exhibit', {
                 template: "#video-exhibit-template",
-                props: ['link', 'src'],
+                props: ['link', 'src', 'altsrc'],
                 methods: {
                     start: function(e) {
                         d3.select(e.target).select('.exhibit-media').node().play();
