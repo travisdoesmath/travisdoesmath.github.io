@@ -104,10 +104,15 @@ export class LifeGame {
     }
 
     play() {
-        if (!this._pause) {
-            
-            this.cells.evolve().then(this.draw());
-            if (!this._pause) { setTimeout(() => { this.play() }, 100); }
+        if (!this.fired) {
+            this.fired = true;
+            setTimeout(() => {  this.fired = false }, 100);
+
+            if (!this._pause) {
+                
+                this.cells.evolve().then(this.draw());
+                if (!this._pause) { setTimeout(() => { this.play() }, 100); }
+            }
         }
     }
 

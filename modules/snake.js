@@ -74,6 +74,7 @@ export class SnakeGame {
     constructor(el, board = new Board(), snake = new Snake(board)) {
         this.board = board;
         this.state = new GameState(board, snake);
+        this.playing = false;
 
         d3.select(el).select('a')
             .on('mouseenter', () => { this.state.pause = false; this.play(); })
@@ -109,51 +110,58 @@ export class SnakeGame {
     }
 
     play() {
-        if (this.state.alive) {
+        if (!this.fired) {
+            this.fired = true;
+            setTimeout(() => {  this.fired = false }, 100);
 
-            let snake = this.state.snake;
+            if (this.state.alive) {
 
-            let currentPos = this.state.snake.currentPos();
+                let snake = this.state.snake;
 
-            if (this.state.food[1] > currentPos[1]) {
-                if (snake.direction == 'right' || snake.direction == 'up') snake.turn('right')
-                if (snake.direction == 'left') snake.turn('left')
-            } else if (this.state.food[1] < currentPos[1]) {
-                if (snake.direction == 'right' || snake.direction == 'down') snake.turn('left')
-                if (snake.direction == 'left') snake.turn('right')
-            } else {
-                if (this.state.food[0] > currentPos[0]) {
-                    if (snake.direction == 'up' || snake.direction == 'left') snake.turn('right')
-                    if (snake.direction == 'down') snake.turn('left')
-                } else if (this.state.food[0] < currentPos[0]) {
-                    if (snake.direction == 'up' || snake.direction == 'right') snake.turn('left')
-                    if (snake.direction == 'down') snake.turn('right')
-                }
-            }
+                let currentPos = this.state.snake.currentPos();
 
-            let nextPos = snake.nextPos();
-
-            // check if nextPos is outside of game area or hits snake
-            if (nextPos[0] < 0 || 
-                nextPos[0] > this.board.pixelsX - 1 || 
-                nextPos[1] < 0 || 
-                nextPos[1] > this.board.pixelsY - 1 || 
-                snake.coords.map(x => this.board.coordToIndex(x)).includes(this.board.coordToIndex(nextPos))) { 
-                this.alive = false; 
-                this.endGame();
-            } else {
-                snake.coords.push(nextPos)
-
-                // check if nextPos is food
-                if (this.board.coordToIndex(this.state.food) === this.board.coordToIndex(nextPos)) {
-                    this.state.food = this.state.setFood();
+                if (this.state.food[1] > currentPos[1]) {
+                    if (snake.direction == 'right' || snake.direction == 'up') snake.turn('right')
+                    if (snake.direction == 'left') snake.turn('left')
+                } else if (this.state.food[1] < currentPos[1]) {
+                    if (snake.direction == 'right' || snake.direction == 'down') snake.turn('left')
+                    if (snake.direction == 'left') snake.turn('right')
                 } else {
-                    snake.coords = snake.coords.slice(1);
+                    if (this.state.food[0] > currentPos[0]) {
+                        if (snake.direction == 'up' || snake.direction == 'left') snake.turn('right')
+                        if (snake.direction == 'down') snake.turn('left')
+                    } else if (this.state.food[0] < currentPos[0]) {
+                        if (snake.direction == 'up' || snake.direction == 'right') snake.turn('left')
+                        if (snake.direction == 'down') snake.turn('right')
+                    }
                 }
-                this.render();
-                if (!this.state.pause) { setTimeout(() => { this.play() }, 100); }
+
+                let nextPos = snake.nextPos();
+
+                // check if nextPos is outside of game area or hits snake
+                if (nextPos[0] < 0 || 
+                    nextPos[0] > this.board.pixelsX - 1 || 
+                    nextPos[1] < 0 || 
+                    nextPos[1] > this.board.pixelsY - 1 || 
+                    snake.coords.map(x => this.board.coordToIndex(x)).includes(this.board.coordToIndex(nextPos))) { 
+                    this.alive = false; 
+                    this.endGame();
+                } else {
+                    snake.coords.push(nextPos)
+
+                    // check if nextPos is food
+                    if (this.board.coordToIndex(this.state.food) === this.board.coordToIndex(nextPos)) {
+                        this.state.food = this.state.setFood();
+                    } else {
+                        snake.coords = snake.coords.slice(1);
+                    }
+                    this.render();
+                    {if (!this.state.pause) { setTimeout(() => {  this.play() }, 100); } }
+                    
+                }
             }
         }
+
 
     }
 

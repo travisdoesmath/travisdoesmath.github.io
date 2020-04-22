@@ -201,10 +201,15 @@ export class PendulumPlayer {
     }
 
     play() {
-        if (!this._pause) {
-            this.update();
-            setTimeout(() => { this.play(); }, 2);
-        }        
+        if (!this.fired) {
+            this.fired = true;
+            setTimeout(() => {  this.fired = false }, 2);
+
+            if (!this._pause) {
+                this.update();
+                setTimeout(() => { this.play(); }, 2);
+            }
+        }
     }
 
     pause() {

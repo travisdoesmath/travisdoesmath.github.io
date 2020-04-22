@@ -21,8 +21,13 @@ export class Exhibit {
     } 
     
     play() {
-        if (!this._pause) {
-            this.update().then(this.draw()).then(setTimeout(() => {this.play();}, this.frameTime));
+        if (!this.fired) {
+            this.fired = true;
+            setTimeout(() => {  this.fired = false }, this.frameTime);
+
+            if (!this._pause) {
+                this.update().then(this.draw()).then(setTimeout(() => {this.play();}, this.frameTime));
+            }
         }
     }
 
