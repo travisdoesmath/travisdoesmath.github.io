@@ -18,13 +18,15 @@
     </head>
     <body>
         <div class='column'>
-            <h1>Travis<span class='red'>R</span>Taylor</h1>
-            <p>Hi, I'm Travis. I like doing a lot of things. This is where I keep the ones I like best.</p>
-            <p>Email me at <a href="mailto:travis@travisrtaylor.com">travis@travisrtaylor.com</a></p>
+            <div class="container">
+                <h1>Travis<span class='red'>R</span>Taylor</h1>
+                <p>Hi, I'm Travis. I like doing a lot of things. This is where I keep the ones I like best.</p>
+                <p>Email me at <a href="mailto:travis@travisrtaylor.com">travis@travisrtaylor.com</a></p>
 
-            <div id="app">
-                <exhibit-grid></exhibit-grid>
-            </div>            
+                <div id="app">
+                    <exhibit-grid></exhibit-grid>
+                </div>            
+            </div>
         </div>
 
         <!-- Templates -->
@@ -46,7 +48,7 @@
         </script>
 
         <script type="text/x-template" id="img-exhibit-template">
-            <a :href="link" target="_blank" @mouseenter="grow" @mouseout="shrink">
+            <a class="exhibit-link" :href="link" target="_blank" @mouseenter="start" @mouseout="stop"  @scrollenter="start" @scrollout="stop">
                 <div class="exhibit-media-container">
                     <img :src="src" class="exhibit-media">
                 </div>
@@ -54,7 +56,7 @@
         </script>
 
         <script type="text/x-template" id="video-exhibit-template">
-            <a :href="link" target="_blank" @mouseenter="play" @mouseout="pause">
+            <a class="exhibit-link" :href="link" target="_blank" @mouseenter="start" @mouseout="stop" @scrollenter="start" @scrollout="stop">
                 <div class="exhibit-media-container">
                     <video :src="src" class="hover-play exhibit-media" muted preload height=100% loop playsinline type="video/webm"></video>
                 </div>
@@ -62,7 +64,7 @@
         </script>
 
         <script type="text/x-template" id="d3-exhibit-template">
-            <a :href="link" target="_blank">
+            <a class="exhibit-link" :href="link" target="_blank" @scrollenter="start" @scrollout="stop">
                 <div class="exhibit-media-container">
                     <div class="d3-target exhibit-media"></div>
                 </div>
@@ -71,6 +73,9 @@
 
         <!-- Vue components and app -->
         <script>
+            var scrollenter = new Event('scrollenter');
+            var scrollout = new Event('scrollout');
+
             Vue.component('exhibit-grid', {
                 template: '#exhibit-grid-template',
                 data() {
@@ -84,10 +89,10 @@
                 template: "#img-exhibit-template",
                 props: ['link', 'src'],
                 methods: {
-                    grow: function(e) {
+                    start: function(e) {
                         d3.select(e.target).select('.exhibit-media').transition().ease(d3.easeCubic).style('transform','scale(1.2)')
                     },
-                    shrink: function(e) {
+                    stop: function(e) {
                         d3.select(e.target).select('.exhibit-media').transition().ease(d3.easeCubic).style('transform','scale(1)')
                     },                    
                 }
@@ -97,18 +102,26 @@
                 template: "#video-exhibit-template",
                 props: ['link', 'src'],
                 methods: {
-                    play: function(e) {
+                    start: function(e) {
                         d3.select(e.target).select('.exhibit-media').node().play();
                     },
-                    pause: function(e) {
-                        d3.select(e.target).select('.exhibit-media').node().play();
+                    stop: function(e) {
+                        d3.select(e.target).select('.exhibit-media').node().pause();
                     }                    
                 }
             })
 
             Vue.component('d3-exhibit', {
                 template: "#d3-exhibit-template",
-                props: ['link']
+                props: ['link'],
+                methods: {
+                    start: function(e) {
+                        console.log('d3 scrollenter')
+                    },
+                    stop: function(e) {
+                        console.log('d3 scrollout')
+                    }
+                }
             })
 
             Vue.component('exhibit', {
@@ -130,6 +143,44 @@
             let lifeGame = new LifeGame(document.getElementById('life'));
             let pendulumPlayer = new PendulumPlayer(document.getElementById('pendulum'));
             let goldenPlayer = new GoldenCurl(document.getElementById('golden'));
+
+            let touched = false;
+
+            d3.select(".column")
+                .on('touchstart', () => touched = true)
+                .on('touchmove', () => touched = true)
+                .on('touchend', () => touched = true)
+
+            let last_known_scroll_position = 0;
+            let ticking = false;
+
+            function doSomething(scroll_pos) {
+                console.log("scrollY", scroll_pos);
+                [...document.getElementsByClassName('exhibit-link')].map(a => {
+                    let top = a.getBoundingClientRect().top;
+                    let bottom = a.getBoundingClientRect().bottom;
+                    if (top < 100 | bottom > window.visualViewport.height - 100) {
+                        a.dispatchEvent(scrollout);
+                    } else {
+                        a.dispatchEvent(scrollenter);
+                    }                    
+                })
+
+            // Do something with the scroll position
+            }
+
+            window.addEventListener('scroll', function(e) {
+            last_known_scroll_position = window.scrollY;
+
+            if (!ticking & touched) {
+                window.requestAnimationFrame(function() {
+                doSomething(last_known_scroll_position);
+                ticking = false;
+                });
+
+                ticking = true;
+            }
+            });
         </script>
         <script>
 

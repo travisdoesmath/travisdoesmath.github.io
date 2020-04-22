@@ -12,14 +12,14 @@ exhibits = [
         link: "https://bl.ocks.org/travisdoesmath/32eea7d1cb47c18bfabcab65abc9b36c",
         title: 'Double Pendulums',
         description: "Showing the sensitive dependence on initial conditions for double pendulums, a simple chaotic system",
-        type: "d3"
+        type: "d3",
     },
     {
         id: 'snake',
         link: "http://travisdoesmath.github.io/d3-snake/",
         title: 'D3 Snake',
         description: 'The classic snake game, implemented with D3.js',
-        type: "d3"
+        type: "d3",
     },
     {
         id: 'woz',
@@ -58,7 +58,7 @@ exhibits = [
         link: "http://travisdoesmath.github.io/d3-life/",
         title: 'D3 Life',
         description: "Conway's Game of Life, implemented in D3.js",
-        type: 'd3'
+        type: 'd3',
     },
     {
         id: 'mudge',
@@ -81,6 +81,6 @@ exhibits = [
         link: "https://bl.ocks.org/travisdoesmath/f7dc3cc59316d3fad39b347b805b2730",
         title: "Golden Curl",
         description: "Playing with golden spirals as limits of matrix interpolations, and then making it curl and uncurl",
-        type: "d3"
+        type: "d3",
     },
 ]
