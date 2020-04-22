@@ -10,7 +10,9 @@ export class Exhibit {
 
         d3.select(el).select('a') 
             .on('mouseenter', () => { this._pause = false; this.play(); })
-            .on('mouseout', () => { this.pause() });
+            .on('scrollenter', () => { this._pause = false; this.play(); })
+            .on('mouseout', () => { this.pause() })
+            .on('scrollout', () => { this.pause() })
 
         this.svg = d3.select(el).select(".d3-target").append('svg')
             .attr("width", this.width)

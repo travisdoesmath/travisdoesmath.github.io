@@ -77,7 +77,9 @@ export class SnakeGame {
 
         d3.select(el).select('a')
             .on('mouseenter', () => { this.state.pause = false; this.play(); })
+            .on('scrollenter', () => { this.state.pause = false; this.play(); })
             .on('mouseout', () => { this.pause(); })
+            .on('scrollout', () => { this.pause(); })
 
         d3.select(el).select('.exhibit-media-container')
             .style('background-color', 'white')

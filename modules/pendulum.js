@@ -86,7 +86,9 @@ export class PendulumPlayer {
 
         d3.select(el).select('a')
             .on('mouseenter', () => { this._pause = false; this.play(); })
-            .on('mouseout', () => { this.pause() });
+            .on('scrollenter', () => { this._pause = false; this.play(); })
+            .on('mouseout', () => { this.pause() })
+            .on('scrollout', () => { this.pause() })
 
         this.canvas = d3.select(el).select(".d3-target").append('canvas')
             .attr('width', this.width)
