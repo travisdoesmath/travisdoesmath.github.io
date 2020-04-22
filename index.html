@@ -56,9 +56,9 @@
         </script>
 
         <script type="text/x-template" id="video-exhibit-template">
-            <a class="exhibit-link" :href="link ? link : null" target="_blank" @mouseenter="start" @mouseout="stop" @scrollenter="start" @scrollout="stop">
+            <a class="exhibit-link" :href="link ? link : null" target="_blank" @mouseenter="start" @click="start" @mouseout="stop" @scrollenter="start" @scrollout="stop">
                 <div class="exhibit-media-container">
-                    <video :src="src" class="hover-play exhibit-media" muted preload height=100% loop playsinline type="video/webm"></video>
+                    <video :src="src" class="hover-play exhibit-media" muted preload height=100% loop playsinline type="video/webm"><img :src="altsrc"></video>
                 </div>
             </a>
         </script>
@@ -158,7 +158,7 @@
                 [...document.getElementsByClassName('exhibit-link')].map(a => {
                     let top = a.getBoundingClientRect().top;
                     let bottom = a.getBoundingClientRect().bottom;
-                    if (top < 100 | bottom > window.visualViewport.height - 100) {
+                    if (top < 0 | bottom > window.visualViewport.height - 0) {
                         a.dispatchEvent(scrollout);
                     } else {
                         a.dispatchEvent(scrollenter);
