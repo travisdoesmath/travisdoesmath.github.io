@@ -1,5 +1,13 @@
 exhibits = [
     {
+        id: 'elevations',
+        title: "State Elevations",
+        link: "https://travisdoesmath.github.io/state-elevations/",
+        description: "Visualizing mean, min, and max elevations by latitude of the Lower 48 US states",
+        src: "media/elevations.png",
+        type: "img"
+    },
+    {
         id: 'covid',
         title: "COVID-19 Deaths",
         link: "http://travisdoesmath.github.io/covid-viz/",
