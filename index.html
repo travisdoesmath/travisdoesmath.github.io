@@ -139,10 +139,12 @@
             import { LifeGame } from './modules/life.js';
             import { PendulumPlayer } from './modules/pendulum.js';
             import { GoldenCurl } from './modules/golden.js';
+            import { Julia } from './modules/julia.js';
             let snakeGame = new SnakeGame(document.getElementById('snake'));
             let lifeGame = new LifeGame(document.getElementById('life'));
             let pendulumPlayer = new PendulumPlayer(document.getElementById('pendulum'));
             let goldenPlayer = new GoldenCurl(document.getElementById('golden'));
+            let juliaPlayer = new Julia(document.getElementById('mandelbrot'));
 
             let touched = false;
 

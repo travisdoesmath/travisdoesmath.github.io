@@ -1,9 +1,15 @@
 exhibits = [
+    {   id: 'mandelbrot',
+        link: 'http://travisdoesmath.github.io/mandelbrot_julia_explorer/',
+        title: 'Mandelbrot & Julia',
+        description: 'Exploring the link between the Mandelbrot set and associated quadratic Julia sets.',
+        type: 'd3'
+    },
     {
         id: 'elevations',
         title: "State Elevations",
         link: "https://travisdoesmath.github.io/state-elevations/",
-        description: "Visualizing mean, min, and max elevations by latitude of the Lower 48 US states",
+        description: "Visualizing mean, min, and max elevations by latitude of the Lower 48 US states.",
         src: "media/elevations.png",
         type: "img"
     },
@@ -11,7 +17,7 @@ exhibits = [
         id: 'covid',
         title: "COVID-19 Deaths",
         link: "http://travisdoesmath.github.io/covid-viz/",
-        description: "Tracking deaths in the US due to COVID<span>&#8209;19</span> versus top causes of death identified by the CDC",
+        description: "Tracking deaths in the US due to COVID<span>&#8209;19</span> versus top causes of death identified by the CDC.",
         src: "media/covid.png",
         type: "img"
     },
@@ -19,14 +25,14 @@ exhibits = [
         id: 'pendulum',
         link: "https://bl.ocks.org/travisdoesmath/32eea7d1cb47c18bfabcab65abc9b36c",
         title: 'Double Pendulums',
-        description: "Showing the sensitive dependence on initial conditions for double pendulums, a simple chaotic system",
+        description: "Showing the sensitive dependence on initial conditions for double pendulums, a simple chaotic system.",
         type: "d3",
     },
     {
         id: 'snake',
         link: "http://travisdoesmath.github.io/d3-snake/",
         title: 'D3 Snake',
-        description: 'The classic snake game, implemented with D3.js',
+        description: 'The classic snake game, implemented with D3.js.',
         type: "d3",
     },
     {
@@ -80,7 +86,7 @@ exhibits = [
         id: 'standard-deviations',
         src: "media/stddev.jpg",
         title: "Standard Deviations",
-        description: "Taking collections of photographs I've taken and calculating the standard deviation across each pixel",
+        description: "Taking collections of photographs I've taken and calculating the standard deviation across each pixel.",
         type: "img"
     },
     {
