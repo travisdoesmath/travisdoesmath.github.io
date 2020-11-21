@@ -1,4 +1,18 @@
 exhibits = [
+    {
+        id: 'triple-pendulum',
+        link: "https://bl.ocks.org/travisdoesmath/3bb265c988c8c026b766e40181e9f398",
+        title: 'Triple Pendulums',
+        description: "Showing the sensitive dependence on initial conditions for triple pendulums, a (less) simple chaotic system.",
+        type: "d3",
+    },
+    {   id: 'code-golf',
+        link: 'https://medium.com/swlh/a-pointless-excursion-code-golfing-in-python-e2104e2040ef',
+        title: 'Code Golfing in Python',
+        description: 'A Completely Pointless Excursion',
+        src: "https://miro.medium.com/max/2184/1*NWIWlLZ8QGU2cWDMQh5gWQ.png",
+        type: 'img'
+    },
     {   id: 'mandelbrot',
         link: 'http://travisdoesmath.github.io/mandelbrot_julia_explorer/',
         title: 'Mandelbrot & Julia',

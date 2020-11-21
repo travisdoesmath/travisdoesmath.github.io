@@ -13,6 +13,7 @@
     <title>Travis R. Taylor</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.2/d3.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/7.6.0/math.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
     <script src="js/exhibits.js"></script>
     </head>
@@ -138,11 +139,13 @@
             import { SnakeGame } from './modules/snake.js';
             import { LifeGame } from './modules/life.js';
             import { PendulumPlayer } from './modules/pendulum.js';
+            import { TriplePendulumPlayer } from './modules/triple-pendulum.js';
             import { GoldenCurl } from './modules/golden.js';
             import { Julia } from './modules/julia.js';
             let snakeGame = new SnakeGame(document.getElementById('snake'));
             let lifeGame = new LifeGame(document.getElementById('life'));
             let pendulumPlayer = new PendulumPlayer(document.getElementById('pendulum'));
+            let triplePendulumPlayer = new TriplePendulumPlayer(document.getElementById('triple-pendulum'));
             let goldenPlayer = new GoldenCurl(document.getElementById('golden'));
             let juliaPlayer = new Julia(document.getElementById('mandelbrot'));
 
