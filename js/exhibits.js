@@ -9,7 +9,7 @@ exhibits = [
     {   id: 'code-golf',
         link: 'https://medium.com/swlh/a-pointless-excursion-code-golfing-in-python-e2104e2040ef',
         title: 'Code Golfing in Python',
-        description: 'A Completely Pointless Excursion',
+        description: 'A completely pointless excursion in writing bad python code (but as little bad python code as possible)',
         src: "https://miro.medium.com/max/2184/1*NWIWlLZ8QGU2cWDMQh5gWQ.png",
         type: 'img'
     },
