@@ -1,5 +1,13 @@
 exhibits = [
     {
+        id: 'circle-of-modes',
+        link: "https://travisdoesmath.github.io/circle-of-modes/",
+        title: 'Circle of Modes',
+        description: "An interactive circle of fifths for the modes of the major scale.",
+        src: "media/modes.png",
+        type: "img",
+    },
+    {
         id: 'triple-pendulum',
         link: "https://bl.ocks.org/travisdoesmath/3bb265c988c8c026b766e40181e9f398",
         title: 'Triple Pendulums',
