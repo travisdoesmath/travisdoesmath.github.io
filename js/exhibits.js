@@ -4,8 +4,7 @@ exhibits = [
         link: "https://travisdoesmath.github.io/random-life/",
         title: 'Random Life',
         description: "A random take on Conway's Game of Life.",
-        src: "media/random-life.png",
-        type: "img",
+        type: "d3",
     },
     {
         id: 'du-bois-spiral',

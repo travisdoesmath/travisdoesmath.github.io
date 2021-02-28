@@ -137,6 +137,7 @@
         </script>
         <script type="module">
             import { SnakeGame } from './modules/snake.js';
+            import { RandomLifeGame } from './modules/random-life.js';
             import { LifeGame } from './modules/life.js';
             import { PendulumPlayer } from './modules/pendulum.js';
             import { TriplePendulumPlayer } from './modules/triple-pendulum.js';
@@ -144,6 +145,7 @@
             import { Julia } from './modules/julia.js';
             let snakeGame = new SnakeGame(document.getElementById('snake'));
             let lifeGame = new LifeGame(document.getElementById('life'));
+            let randomLifeGame = new RandomLifeGame(document.getElementById('random-life'));
             let pendulumPlayer = new PendulumPlayer(document.getElementById('pendulum'));
             let triplePendulumPlayer = new TriplePendulumPlayer(document.getElementById('triple-pendulum'));
             let goldenPlayer = new GoldenCurl(document.getElementById('golden'));
