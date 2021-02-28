@@ -1,5 +1,21 @@
 exhibits = [
     {
+        id: 'random-life',
+        link: "https://travisdoesmath.github.io/random-life/",
+        title: 'Random Life',
+        description: "A random take on Conway's Game of Life.",
+        src: "media/random-life.png",
+        type: "img",
+    },
+    {
+        id: 'du-bois-spiral',
+        link: "https://travisdoesmath.github.io/d3-du-bois-spiral/",
+        title: 'Du Bois Spiral',
+        description: "Recreating a spiral chart layout from W.E.B. Du Bois created circa 1900.",
+        src: "media/du-bois-spiral.png",
+        type: "img",
+    },
+    {
         id: 'circle-of-modes',
         link: "https://travisdoesmath.github.io/circle-of-modes/",
         title: 'Circle of Modes',
