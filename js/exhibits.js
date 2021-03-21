@@ -1,5 +1,13 @@
 exhibits = [
     {
+        id: 'milky-way-planner',
+        link: "https://travisdoesmath.github.io/milky-way-planner/",
+        title: 'Milky Way Planner',
+        description: "A tool for planning Milky Way photography nights.",
+        src: "media/milkywayplanner.png",
+        type: "img",
+    },
+    {
         id: 'random-life',
         link: "https://travisdoesmath.github.io/random-life/",
         title: 'Random Life',
