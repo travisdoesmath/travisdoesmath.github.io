@@ -1,10 +1,42 @@
 exhibits = [
     {
+        id: 'n-pendulum-explainer',
+        link: "https://travisdoesmath.github.io/pendulum-explainer/",
+        title: 'n-Tuple Pendulum DIY',
+        description: 'How to build your own n-tuple pendulum simulator in JavaScript',
+        src: 'media/pendulum-explainer.png',
+        type: 'img',
+    },
+    {
         id: 'milky-way-planner',
         link: "https://travisdoesmath.github.io/milky-way-planner/",
         title: 'Milky Way Planner',
         description: "A tool for planning Milky Way photography nights.",
         src: "media/milkywayplanner.png",
+        type: "img",
+    },
+    {
+        id: 'du-bois-spiral',
+        link: "https://travisdoesmath.github.io/d3-du-bois-spiral/",
+        title: 'Du Bois Spiral in D3',
+        description: "Recreating a spiral chart layout from W.E.B. Du Bois, created circa 1900.",
+        src: "media/du-bois-spiral.png",
+        type: "img",
+    },
+    {
+        id: 'covid',
+        title: "COVID-19 Deaths",
+        link: "http://travisdoesmath.github.io/covid-viz/",
+        description: "Tracking deaths in the US due to COVID<span>&#8209;19</span> versus top causes of death identified by the CDC.",
+        src: "media/covid.png",
+        type: "img"
+    },
+    {
+        id: 'circle-of-modes',
+        link: "https://travisdoesmath.github.io/circle-of-modes/",
+        title: 'Circle of Modes',
+        description: "An interactive circle of fifths for the modes of the major scale.",
+        src: "media/modes.png",
         type: "img",
     },
     {
@@ -14,21 +46,11 @@ exhibits = [
         description: "A random take on Conway's Game of Life.",
         type: "d3",
     },
-    {
-        id: 'du-bois-spiral',
-        link: "https://travisdoesmath.github.io/d3-du-bois-spiral/",
-        title: 'Du Bois Spiral',
-        description: "Recreating a spiral chart layout from W.E.B. Du Bois created circa 1900.",
-        src: "media/du-bois-spiral.png",
-        type: "img",
-    },
-    {
-        id: 'circle-of-modes',
-        link: "https://travisdoesmath.github.io/circle-of-modes/",
-        title: 'Circle of Modes',
-        description: "An interactive circle of fifths for the modes of the major scale.",
-        src: "media/modes.png",
-        type: "img",
+    {   id: 'mandelbrot',
+        link: 'http://travisdoesmath.github.io/mandelbrot_julia_explorer/',
+        title: 'Mandelbrot & Julia',
+        description: 'Exploring the link between the Mandelbrot set and associated quadratic Julia sets.',
+        type: 'd3'
     },
     {
         id: 'triple-pendulum',
@@ -44,26 +66,12 @@ exhibits = [
         src: "https://miro.medium.com/max/2184/1*NWIWlLZ8QGU2cWDMQh5gWQ.png",
         type: 'img'
     },
-    {   id: 'mandelbrot',
-        link: 'http://travisdoesmath.github.io/mandelbrot_julia_explorer/',
-        title: 'Mandelbrot & Julia',
-        description: 'Exploring the link between the Mandelbrot set and associated quadratic Julia sets.',
-        type: 'd3'
-    },
     {
         id: 'elevations',
         title: "State Elevations",
         link: "https://travisdoesmath.github.io/state-elevations/",
         description: "Visualizing mean, min, and max elevations by latitude of the Lower 48 US states.",
         src: "media/elevations.png",
-        type: "img"
-    },
-    {
-        id: 'covid',
-        title: "COVID-19 Deaths",
-        link: "http://travisdoesmath.github.io/covid-viz/",
-        description: "Tracking deaths in the US due to COVID<span>&#8209;19</span> versus top causes of death identified by the CDC.",
-        src: "media/covid.png",
         type: "img"
     },
     {
